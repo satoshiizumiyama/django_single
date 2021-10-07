@@ -15,7 +15,8 @@
     },
     // コンテナ側のVSCodeに拡張機能をインストールする必要がある場合、拡張機能のIDを配列で設定します。
     "extensions": [
-        "golang.Go"
-    ]
+        "ms-python.python",
+        "atisteo.vscode-django",
+    ],
     "appPort": [8888]
 }
