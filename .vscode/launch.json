@@ -5,6 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Test Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/mysite/manage.py",
+            "args": [
+                "test",
+                "polls",
+            ],
+            "env": {
+                "PYTHONPATH": "/home/vscode/.pyenv/shims/"
+            },
+            "django": true
+
+        },
+        {
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
