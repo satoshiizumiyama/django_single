@@ -13,6 +13,7 @@ RUN apt-get install -y libbz2-dev
 RUN apt-get install -y liblzma-dev
 RUN apt-get install -y wget curl python-dev python3-pip build-essential libffi-dev libssl-dev zlib1g-dev git
 RUN apt-get install -y libsqlite3-dev libreadline6-dev libsqlite3-dev libncursesw5-dev libdb-dev libexpat1-dev libgdbm-dev libmpdec-dev
+RUN apt install -y apache2 apache2-dev
 
 ENV HOME /home/vscode
 ENV PYENV_ROOT $HOME/.pyenv
@@ -28,7 +29,8 @@ RUN echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 WORKDIR /home/vscode
 
 # can't find path of pyenv
-RUN pyenv install 3.8.6
+RUN env PYTHON_CONFIGURE_OPTS="--enable-shared" pyenv install 3.8.6
+#RUN pyenv install 3.8.6
 RUN pyenv global 3.8.6
 COPY requirements.txt /home/vscode
 RUN source /home/vscode/.bashrc
