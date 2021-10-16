@@ -26,6 +26,10 @@ python manage.py collectstaticで設定したパスにstaticを作成する
 djangoのプロジェクト内部でuwsgi --socket :8001 --module mysite.wsgi --py-autoreload 1 --logto /tmp/mylog.logを実行(app.wsgiのappはプロジェクト名に依存)  
 chdirを使えば実行するパスは調整できる。プロジェクトのルートになるよう調整  
   
+nginx専用のフォルダを用意。nginxとuwsgiを別コンテナにすることが可能。もっともdocker-compose使えという話になるので、nginxフォルダ(Dockerfileと設定ファイル2つ)のみgitに追加  
+nginx専用でコンテナを立てる。app_nginx.confのupstreamにuwsgiコンテナをipアドレスを書く  
+uwsgiの方のdevcontainer.jsonでappportから8000を削除してコンテナを作れば後は一緒  
+  
 学習ポイント
 app_nginx.confのupstreamのserverに別ipアドレスを指定すればnginxとuwsgiを別コンテナで動かすことができる  
 staticのパスはsettings.pyの他にapp_nginx.confでそろえる必要がある  
