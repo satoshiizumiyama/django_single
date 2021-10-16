@@ -13,7 +13,7 @@ RUN apt-get install -y libbz2-dev
 RUN apt-get install -y liblzma-dev
 RUN apt-get install -y wget curl python-dev python3-pip build-essential libffi-dev libssl-dev zlib1g-dev git
 RUN apt-get install -y libsqlite3-dev libreadline6-dev libsqlite3-dev libncursesw5-dev libdb-dev libexpat1-dev libgdbm-dev libmpdec-dev
-RUN apt install -y apache2 apache2-dev
+RUN apt install -y apache2 apache2-dev vim locales-all
 
 ENV HOME /home/vscode
 ENV PYENV_ROOT $HOME/.pyenv
@@ -37,7 +37,8 @@ RUN source /home/vscode/.bashrc
 
 RUN /home/vscode/.pyenv/shims/pip3 install -r requirements.txt
 
-# can't use environment ver without arg
-#RUN export PATH="$PATH:/root/.pyenv/versions/3.8.6/bin"
-
-
+COPY ./setting/apache2.conf /etc/apache2/
+COPY ./setting/django.conf /etc/apache2/sites-available/
+RUN a2dissite 000-default
+RUN a2ensite django
+#CMD ["apache2ctl", "restart"]
